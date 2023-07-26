@@ -56,7 +56,7 @@ jobs:
         uses: docker/build-push-action@v3
         id: docker_build
         with:
-          push: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/api-view' }}
+          push: ${{ github.event_name != 'pull_request' && (github.ref == 'refs/heads/api-view' || github.ref == 'refs/heads/flask-v1') }}
           context: .
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
