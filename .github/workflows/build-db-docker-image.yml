@@ -27,7 +27,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           images: |
-            ghcr.io/${{ github.actor }}/${{ github.repository }}-db
+            ghcr.io/${{ github.repository }}-db
           tags: |
             type=schedule
             type=ref,event=branch
