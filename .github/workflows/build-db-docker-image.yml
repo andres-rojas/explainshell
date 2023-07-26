@@ -3,7 +3,7 @@ name: Build & Publish MongoDB Docker Image
 on:
   workflow_dispatch:
   push:
-    branches: ['build-db-image']
+    branches: ['api-view']
 
 permissions:
   packages: write
@@ -27,7 +27,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           images: |
-            ghcr.io/${{ github.actor }}/${{ github.repository }}
+            ghcr.io/${{ github.actor }}/${{ github.repository }}-db
           tags: |
             type=schedule
             type=ref,event=branch
@@ -54,7 +54,7 @@ jobs:
         uses: docker/build-push-action@v3
         id: docker_build
         with:
-          push: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/build-db-image' }}
+          push: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/api-view' }}
           context: db
           platforms: linux/arm64,linux/amd64
           tags: ${{ steps.meta.outputs.tags }}
